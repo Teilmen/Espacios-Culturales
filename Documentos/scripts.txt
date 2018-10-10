@@ -1,0 +1,95 @@
+ejecutar servidor rails
+rails server - rails s
+instalar o desinstalar gemas
+bundle
+
+
+rails new culturapp --api --database=postgresql (configurar clave y usuario de postgres en config/database )
+rails db:create
+(scaffolds)
+rails db:migrate
+
+Scripts scaffolds
+#tabla S == tabla Semilla(creada y llenada en seeds.rb con rails)
+		rails g scaffold Notification tipo fecha:datetime mensaje:text User:references		
+		rails g scaffold User nombre correo_electronico:uniq password_digest username:uniq 
+		fecha_naciemiento:date puntaje:integer 
+//tabla S-M	rails g model ListFriend user:references User:references		
+//tabla S-M	rails g model TypeActivity nombre:uniq				
+//tabla S-M	rails g model TypePublic nombre:uniq				
+		rails g scaffold Event nombre lugar descripcion:text direccion requisitos:text
+			fecha:datetime duracion TypeActivity:references TypePublic:references
+//tabla S-M	rails g model EventUser creador:boolean asistencia:boolean		
+			calificacion:integer comentario:text Event:references User:references
+
+
+create table notifications(
+	id int,
+	tipo varchar(30) not null,
+	fecha timedate,
+	mensaje varchar(50)not null,
+	primary key (id)
+);
+
+create table users(
+	id int,
+	nombre varchar(30) not null,
+	correo_electronico varchar(30) not null,
+	contraseña varchar(20) not null,
+	username varchar(20) not null,
+	fecha_nacimiento date not null,	
+	puntaje int not null,
+	primary key (id)
+);
+
+create table list_friends(
+	id int,
+	id_usuario1 int not null,
+	id_usuario2 int not null,
+	primary key (id),
+	foreign key (id_usuario1) references users(id),
+	foreign key (id_usuario2) references users(id)
+);
+
+create table type_activities(
+	id int,
+	nombre varchar(30) not null,
+	primary key (id)
+);
+
+create table type_publics(
+	idint,
+	nombre varchar(30) not null,
+	primary key (id)
+)
+
+create table events(
+	id int,
+	nombre varchar(25) not null,
+	lugar varchar(25) not null,
+	descripcion  varchar(40) not null,
+	direccion varchar(25) not null,
+	requisitos varchar(30),
+	fecha timedate not null,
+	duracion varchar(10) not null,
+	id_actividad int,
+	id_tipo_publico int,
+	primary key (id),
+	foreign key (id_actividad) references type_activities(id),
+	foreign key (id_tipo_publico) references type_publics(id)
+);
+
+create table Event_Users(
+	int id,
+	id_usuario varchar(20),
+	id_evento varchar(20),
+	fecha timestamp not null,
+	creador boolean not null,
+	calificacion int,
+	comentario varchar(30),
+	primary key (id),
+	foreign key (id_usuario) references users(idusuario),
+	foreign key (id_evento) references events(idevento)
+);
+
+select now();

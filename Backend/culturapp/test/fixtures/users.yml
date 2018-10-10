@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  nombre: MyString
+  correo_electronico: MyString
+  password_digest: MyString
+  username: MyString
+  fecha_nacimiento: 2018-10-08
+  puntaje: 1
+
+two:
+  nombre: MyString
+  correo_electronico: MyString
+  password_digest: MyString
+  username: MyString
+  fecha_nacimiento: 2018-10-08
+  puntaje: 1
